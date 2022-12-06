@@ -54,6 +54,7 @@ app.MapPut("/api/users", (User userData) => {
 
     var user = db.Users.FirstOrDefault(u => u.Id == userData.Id);
 
+
     if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
 
 
