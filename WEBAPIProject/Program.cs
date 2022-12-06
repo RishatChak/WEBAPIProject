@@ -15,8 +15,7 @@ app.MapGet("/api/users/{id}", (string id) =>
     using ApplicationContext db = new ApplicationContext();
     User user = db.Users.FirstOrDefault(u => Convert.ToString(u.Id) == id);
 
-    if (user == null) return Results.NotFound(new { message = "������������ �� ������" });
-    if (user == null) return Results.NotFound(new { message = "" });
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
 
     return Results.Json(user);
 });
@@ -27,9 +26,7 @@ app.MapDelete("/api/users/{id}", (string id) =>
 
     User user = db.Users.FirstOrDefault(u => Convert.ToString(u.Id) == id);
 
-    if (user == null) return Results.NotFound(new { message = "������������ �� ������" });
-   
-    if (user == null) return Results.NotFound(new { message = "" });
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
         
     db.Users.Remove(user);
     db.SaveChanges();
@@ -52,8 +49,7 @@ app.MapPut("/api/users", (User userData) => {
 
     var user = db.Users.FirstOrDefault(u => u.Id == userData.Id);
 
-    if (user == null) return Results.NotFound(new { message = "������������ �� ������" });
-    if (user == null) return Results.NotFound(new { message = "" });
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
 
     user.Age = userData.Age;
     user.Name = userData.Name;
