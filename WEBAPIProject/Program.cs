@@ -14,25 +14,24 @@ app.MapGet("/api/users/{id}", (string id) =>
 {
     using ApplicationContext db = new ApplicationContext();
     User user = db.Users.FirstOrDefault(u => Convert.ToString(u.Id) == id);
-    // �������� ������������ �� id 
 
-    // ���� �� ������, ���������� ��������� ��� � ��������� �� ������
-    if (user == null) return Results.NotFound(new { message = "������������ �� ������" });
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
 
-    // ���� ������������ ������, ���������� ���
+
     return Results.Json(user);
 });
 
 app.MapDelete("/api/users/{id}", (string id) =>
 {
     using ApplicationContext db = new ApplicationContext();
-    // �������� ������������ �� id
+
     User user = db.Users.FirstOrDefault(u => Convert.ToString(u.Id) == id);
 
-    // ���� �� ������, ���������� ��������� ��� � ��������� �� ������
-    if (user == null) return Results.NotFound(new { message = "������������ �� ������" });
 
-    // ���� ������������ ������, ������� ���
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
+    
+
+
     db.Users.Remove(user);
     db.SaveChanges();
     return Results.Json(user);
@@ -44,7 +43,7 @@ app.MapPost("/api/users", (User user) => {
     User user1 = new User();
     db.Users.Add(user1);
 
-    // ��������� ������������ � ������
+
     db.Users.Add(user);
     db.SaveChanges();
     return user;
@@ -52,11 +51,11 @@ app.MapPost("/api/users", (User user) => {
 
 app.MapPut("/api/users", (User userData) => {
     using ApplicationContext db = new ApplicationContext();
-    // �������� ������������ �� id
+
     var user = db.Users.FirstOrDefault(u => u.Id == userData.Id);
-    // ���� �� ������, ���������� ��������� ��� � ��������� �� ������
-    if (user == null) return Results.NotFound(new { message = "������������ �� ������" });
-    // ���� ������������ ������, �������� ��� ������ � ���������� ������� �������
+
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
+
 
     user.Age = userData.Age;
     user.Name = userData.Name;
@@ -69,8 +68,8 @@ app.Run();
 public class User
 {
     public int Id { get; set; }
-    public string Name { get; set; } = ""; // ��� ������������
-    public int Age { get; set; } // ������� ������������
+    public string Name { get; set; } = ""; 
+    public int Age { get; set; }
 }
 
 public class ApplicationContext : DbContext
