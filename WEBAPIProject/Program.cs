@@ -28,7 +28,7 @@ app.MapDelete("/api/users/{id}", (string id) =>
     User user = db.Users.FirstOrDefault(u => Convert.ToString(u.Id) == id);
 
 
-    if (user == null) return Results.NotFound(new { message = "Пользователь не найден" });
+    if (user == null) return Results.NotFound(new { message = "Пользователь не найден"  });
     
 
 
