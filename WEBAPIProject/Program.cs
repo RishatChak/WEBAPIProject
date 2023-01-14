@@ -36,9 +36,6 @@ app.MapDelete("/api/users/{id}", (string id) =>
 app.MapPost("/api/users", (User user) => {
     using ApplicationContext db = new ApplicationContext();
 
-    User user1 = new User();
-    db.Users.Add(user1);
-
     db.Users.Add(user);
     db.SaveChanges();
     return user;
